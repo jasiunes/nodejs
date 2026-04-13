@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import { TVShowSchema } from '../src/tvshow.schema';
 
 const BASE_URL = 'http://localhost:3000';
-
 // Test 1: Fetch all TV shows
 // --------------------------
 test('GET /tvshows returns an array of TV shows', async ({ request }) => {
@@ -14,7 +13,6 @@ test('GET /tvshows returns an array of TV shows', async ({ request }) => {
     expect(() => TVShowSchema.parse(item)).not.toThrow();
   });
 });
-
 // Test 2: Fetch a TV show by ID
 // -----------------------------
 test('GET /tvshows/:id returns a single TV show', async ({ request }) => {
@@ -80,7 +78,6 @@ test('DELETE /tvshows/:id deletes a TV show', async ({ request }) => {
   const getResponse = await request.get(`${BASE_URL}/tvshows/${added.id}`);
   expect(getResponse.status()).toBe(404);
 });
-
 // Bonus: Negative test for invalid data
 // -------------------------------------
 test('POST /tvshows with invalid data returns 400', async ({ request }) => {
@@ -95,7 +92,6 @@ test('POST /tvshows with invalid data returns 400', async ({ request }) => {
   const data = await response.json();
   expect(data.error).toBeDefined();
 });
-
 // Bonus: Test error response for missing TV show
 // ----------------------------------------------
 test('GET /tvshows/:id returns 404 for missing TV show', async ({ request }) => {
@@ -104,7 +100,6 @@ test('GET /tvshows/:id returns 404 for missing TV show', async ({ request }) => 
   const data = await response.json();
   expect(data.error).toBe('TV show not found');
 });
-
 // Bonus: Setup and Teardown Example
 // ---------------------------------
 test.beforeEach(async ({ request }) => {
